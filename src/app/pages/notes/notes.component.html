@@ -1,0 +1,45 @@
+<div class="h-screen w-screen p-2 flex justify-center items-center">
+    <div class=" h-full w-full container">
+        <div class="flex justify-between items-center border p-2 px-8 rounded-full">
+            <h1 class="text-left text-2xl text-white font-semibold   ">
+                Your notes
+            </h1>
+            <label class="input input-bordered flex items-center gap-2">
+                <input type="text" class="grow" placeholder="Search" />
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
+                    class="w-4 h-4 opacity-70">
+                    <path fill-rule="evenodd"
+                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </label>
+            <button class="btn btn-primary px-8 rounded-full" (click)="openModal()">Add</button>
+        </div>
+        <div class="h-[85%] w-full overflow-y-auto px-8 scroll-none mt-4 mb-10 ">
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-7 ">
+                @for (paragraph of paragraphs; track $index) {
+                <div class="bg-neutral p-4 rounded-lg py-4 overflow-hidden ">
+                    <span class="text-white font-semibold text-xl capitalize ">{{paragraph.title}}</span>
+                    <div class="overflow-hidden text-left">
+                        <p class="text-base {{ paragraph.content.length > 150 ? ' line-clamp-4' : 'h-fit' }}">
+                            {{ paragraph.content }}
+                        </p>
+                    </div>
+                    <small class="py-4 text-xs text-white">{{paragraph.date}}</small>
+                </div>
+
+                }
+                <p class="bg-neutral p-4 rounded-lg {{paragraphs.length > 150 ? ' line-clamp-4' : 'h-fit' }}">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    @if (showModal) {
+    <div [@modalAnimation]>
+        <app-modal (closeModal)="openModal()"></app-modal>
+    </div>
+    }
+</div>

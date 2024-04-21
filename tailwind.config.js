@@ -4,8 +4,16 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+
+    },
+    fontSize:{
+      xs : '11px',
+    },
+    daisyui: {
+      themes: ["retro"]
+    },
   },
   
-  plugins: [],
+  plugins: [require("daisyui")],
 }
