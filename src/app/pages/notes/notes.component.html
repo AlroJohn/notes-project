@@ -1,4 +1,4 @@
-<div class="h-screen w-screen p-2 flex justify-center items-center" >
+<div class="h-screen w-screen p-2 flex justify-center items-center relative">
     <div class=" h-full w-full container">
         <!-- HEADER -->
         <app-header (open)="openModal()"></app-header>
@@ -7,31 +7,39 @@
             <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-7 ">
                 @for (paragraph of paragraphs; track $index) {
                 <div class=" p-4 rounded-lg py-4 overflow-hidden ">
-                    <span class="text-warning font-semibold text-xl capitalize ">{{paragraph.title}}</span>
-                    <div class="overflow-hidden text-left">
-                        <p class="text-base {{ paragraph.content.length > 150 ? ' line-clamp-4' : 'h-fit' }}">
+                    <div class="p-2 overflow-hidden">
+                        <span
+                            class="text-warning font-semibold text-xl capitalize w-7 truncate">{{paragraph.title}}</span>
+                        <p></p>
+                    </div>
+                    <div class="overflow-hidden text-left bg-base-300 p-3 rounded-lg shadow-xl">
+                        <p class="text-base {{ paragraph.content.length > 150 ? 'line-clamp-11' : 'h-fit' }}">
                             {{ paragraph.content }}
                         </p>
                     </div>
-                    <small class="text-warning py-4 text-xs">{{paragraph.date}}</small>
+                    <div class="px-2">
+                        <small class="text-warning py-4 text-xs">{{paragraph.date}}</small>
+                    </div>
                 </div>
-
                 }
-                <p class="border-2 border-error/20 p-4 rounded-lg {{paragraphs.length > 150 ? ' line-clamp-4' : 'h-fit' }}">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
 
             </div>
         </div>
     </div>
 
     @if (showModal) {
-    <div [@modalAnimation]>
+    <div [@translateAnimation] class="absolute right-24 bottom-0">
         <ng-template #modalContent>
             <!-- Your form or any other content goes here -->
-            <form>
-                <h1>DUDUDUDU</h1>
-            </form>
+            <div class="flex flex-col">
+                <form class="flex flex-col gap-2 p-4">
+                    <label for="title">Title: </label>
+                    <input type="text" placeholder="Type here" class="input input-bordered w-full mb-3" />
+                    <label for="content">Content:</label>
+                    <textarea placeholder="What's on your mind"
+                        class="textarea textarea-bordered textarea-md block w-full h-56 overflow-auto resize-none"></textarea>
+                </form>
+            </div>
         </ng-template>
         <app-modal [modalContent]="modalContent" (closeModal)="openModal()"></app-modal>
     </div>

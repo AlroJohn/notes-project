@@ -18,38 +18,39 @@ import { HeaderComponent } from "../header/header.component";
                 animate('0.2s ease-in-out')
             ])
         ]),
-        [
-            trigger('fadeInOut', [
-                transition(':enter', [
-                    style({ opacity: 0 }),
-                    animate('500ms', style({ opacity: 1 })),
-                    transition(':leave', [
-                        animate('600ms', style({ opacity: 0 }))
-                    ])
-                ])
+        trigger('translateAnimation', [
+            state('void', style({ opacity: 0, transform: 'translateY(500px)' })),
+            transition(':enter', [
+                style({ opacity: 0, transform: 'translateY(500px)' }),
+                animate('0.2s ease-in-out', style({ opacity: 1, transform: 'translateY(0)' }))
+            ]),
+            transition(':leave', [
+                animate('0.2s ease-in-out', style({ opacity: 0, transform: 'translateY(500px)' }))
             ])
-        ]
+        ])
+
     ],
     imports: [CommonModule, ModalComponent, HeaderComponent]
 })
 export class NotesComponent implements OnInit {
-  darkMode: boolean = false;
-  showModal: boolean = false;
+    
+    darkMode: boolean = false;
+    showModal: boolean = false;
 
-  paragraphs = Array(10).fill({
-    date: '2024-04-21',
-    title: 'Example Title',
-    content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, laboriosam corporis sit consequuntur eos, officiis culpa illo similique quam eligendi cum, reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum. reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum. reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum. reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum.'
-  });
+    paragraphs = Array(10).fill({
+        date: '2024-04-21',
+        title: 'Example Title',
+        content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, laboriosam corporis sit consequuntur eos, officiis culpa illo similique quam eligendi cum, reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum. reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum. reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum. reiciendis repellendus? Facilis iste excepturi commodi quos id dolorum.'
+    });
 
-  openModal() {
-    this.showModal = !this.showModal
-  }
+    openModal() {
+        this.showModal = !this.showModal
+    }
 
-  addNewNote() {
+    addNewNote() {
 
-  }
-  ngOnInit(): void {
+    }
+    ngOnInit(): void {
 
-  }
+    }
 }

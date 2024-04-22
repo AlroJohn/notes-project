@@ -5,10 +5,30 @@ module.exports = {
   ],
   theme: {
     extend: {
-      // Define your custom theme styles here
+      lineClamp: {
+        7: '7',
+        8: '8',
+        9: '9',
+        10: '10',
+        11: '11',
+        12: '12',
+      },
+      boxShadow: {
+        '3xl': '0 35px 60px -15px rgba(0, 0, 0, 0.3)',
+      }
     },
     fontSize: {
       xs: '11px',
+      sm: '12px',
+      base: '14px',
+      lg: '16px',
+      xl: '18px',
+      '2xl': '20px',
+      '3xl': '24px',
+      '4xl': '28px',
+      '5xl': '32px',
+      '6xl': '36px',
+      
     },
   },
   daisyui: {

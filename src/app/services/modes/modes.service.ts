@@ -4,10 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ModesService {
-  
-  darkMode: boolean = false; // Set the initial theme mode (e.g., light mode)
-  
-  toggleTheme() {
-    this.darkMode = !this.darkMode;
+  private _retroMode = true;
+
+  get retroMode(): boolean {
+    return this._retroMode;
+  }
+
+  set retroMode(value: boolean) {
+    this._retroMode = value;
   }
 }
