@@ -2,37 +2,38 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from "../modal/modal.component";
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { HeaderComponent } from "../header/header.component";
 
 @Component({
     selector: 'app-notes',
     standalone: true,
     templateUrl: './notes.component.html',
     styleUrl: './notes.component.css',
-    imports: [CommonModule, ModalComponent],
     animations: [
-      trigger('modalAnimation', [
-        state('void', style({
-          opacity: 0
-        })),
-        transition(':enter, :leave', [
-          animate('0.2s ease-in-out')
-        ])
-      ]),
-      [
-        trigger('fadeInOut', [
-          transition(':enter', [
-            style({ opacity: 0 }),
-            animate('500ms', style({ opacity: 1 })),
-            transition(':leave', [
-              animate('600ms', style({ opacity: 0 }))
+        trigger('modalAnimation', [
+            state('void', style({
+                opacity: 0
+            })),
+            transition(':enter, :leave', [
+                animate('0.2s ease-in-out')
             ])
-  
-          ])
-        ])
-      ]
+        ]),
+        [
+            trigger('fadeInOut', [
+                transition(':enter', [
+                    style({ opacity: 0 }),
+                    animate('500ms', style({ opacity: 1 })),
+                    transition(':leave', [
+                        animate('600ms', style({ opacity: 0 }))
+                    ])
+                ])
+            ])
+        ]
     ],
+    imports: [CommonModule, ModalComponent, HeaderComponent]
 })
 export class NotesComponent implements OnInit {
+  darkMode: boolean = false;
   showModal: boolean = false;
 
   paragraphs = Array(10).fill({
