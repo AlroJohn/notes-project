@@ -1,28 +1,48 @@
 <div class="h-screen w-screen p-2 flex justify-center items-center relative">
     <div class=" h-full w-full container">
         <!-- HEADER -->
-        <app-header (open)="openModal()"></app-header>
-
+        <ng-template #headerButton>
+            <button class="btn btn-outline btn-primary px-6 rounded-full {{showModal ? 'hidden' : ''}}"
+                (click)="openModal()">Add Notes</button>
+        </ng-template>
+        <app-header [headerButton]="headerButton"></app-header>
         <div class="h-[85%] w-full overflow-y-auto px-8 scroll-none mt-4 mb-10 ">
-            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-7 ">
-                @for (paragraph of paragraphs; track $index) {
-                <div class=" p-4 rounded-lg py-4 overflow-hidden ">
+            <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 xs:grid-cols-1 gap-2">
+                @for (note of notes$ | async; track $index) {
+                <div class="p-4 rounded-lg py-4 overflow-hidden">
                     <div class="p-2 overflow-hidden">
-                        <span
-                            class="text-warning font-semibold text-xl capitalize w-7 truncate">{{paragraph.title}}</span>
-                        <p></p>
+                        <span class="text-warning font-semibold text-xl capitalize relative inline-block group">
+                            <a href="/notes/view" class="relative z-10">{{note.title}}</a>
+                            <span
+                                class="absolute bottom-0 left-0 w-full h-0.5 bg-yellow-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left">
+                            </span>
+                        </span>
                     </div>
-                    <div class="overflow-hidden text-left bg-base-300 p-3 rounded-lg shadow-xl">
-                        <p class="text-base {{ paragraph.content.length > 150 ? 'line-clamp-11' : 'h-fit' }}">
-                            {{ paragraph.content }}
+                    <div class="overflow-hidden text-left bg-base-300 p-4 rounded-lg shadow-xl">
+                        <p class="text-base {{ note.content.length > 150 ? 'line-clamp-11' : 'h-fit' }}">
+                            {{note.content }}
                         </p>
                     </div>
-                    <div class="px-2">
-                        <small class="text-warning py-4 text-xs">{{paragraph.date}}</small>
+                    <div class="px-2 flex flex-row justify-between items-center">
+                        <small class="text-warning py-4 text-xs">{{ note.created_at | date:'medium' }}</small>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16">
+                            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="1.5">
+                                <circle cx="2.5" cy="8" r=".75" />
+                                <circle cx="8" cy="8" r=".75" />
+                                <circle cx="13.5" cy="8" r=".75" />
+                            </g>
+                        </svg>
+                        <div class="dropdown dropdown-left dropdown-end">
+                            <div tabindex="0" role="button" class="btn m-1">Click</div>
+                            <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                              <li><a>Item 1</a></li>
+                              <li><a>Item 2</a></li>
+                            </ul>
+                          </div>
                     </div>
                 </div>
                 }
-
             </div>
         </div>
     </div>
@@ -32,16 +52,24 @@
         <ng-template #modalContent>
             <!-- Your form or any other content goes here -->
             <div class="flex flex-col">
-                <form class="flex flex-col gap-2 p-4">
+                <form class="flex flex-col gap-2 p-4" (ngSubmit)="addNewNote()">
                     <label for="title">Title: </label>
-                    <input type="text" placeholder="Type here" class="input input-bordered w-full mb-3" />
+                    <input type="text" placeholder="Add title to your note" class="input input-bordered w-full mb-3"
+                        [(ngModel)]="title" name="title" />
                     <label for="content">Content:</label>
                     <textarea placeholder="What's on your mind"
-                        class="textarea textarea-bordered textarea-md block w-full h-56 overflow-auto resize-none"></textarea>
+                        class="textarea textarea-bordered textarea-md block w-full h-56 overflow-auto resize-none"
+                        [(ngModel)]="content" name="content"></textarea>
+                    <div class="mt-2">
+                        <button type="submit" class="btn rounded-full w-full ease-in-out duration-500">Add to
+                            notes</button>
+                    </div>
                 </form>
             </div>
         </ng-template>
         <app-modal [modalContent]="modalContent" (closeModal)="openModal()"></app-modal>
     </div>
     }
+
+
 </div>

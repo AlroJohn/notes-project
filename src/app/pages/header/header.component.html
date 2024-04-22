@@ -13,8 +13,8 @@
         </label>
     </div>
     <div class="flex gap-2">
-        <button class="btn btn-outline btn-primary px-6 rounded-full" (click)="onOpen()">Add</button>
-
+        
+        <ng-container *ngTemplateOutlet="headerButton"></ng-container>
         <label class="swap swap-rotate">
             <!-- this hidden checkbox controls the state -->
             <input type="checkbox" (click)="modesOnOff()" />

@@ -4,11 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 
 //Firebase Database imports
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { ModesService } from './services/modes/modes.service';
-import { firebaseConfig } from '../environments/environment';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { environment } from '../environments/environment.development';
+import { FormsModule } from '@angular/forms';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 export const appConfig: ApplicationConfig = {
@@ -17,11 +18,15 @@ export const appConfig: ApplicationConfig = {
       withViewTransitions(),
     ),
     importProvidersFrom(
-      provideFirebaseApp(() => initializeApp(firebaseConfig)),
-      provideAuth(() => getAuth()),
-      provideDatabase(() => getDatabase()),
+      
+      AngularFireModule.initializeApp(environment.firebaseConfig),
+      AngularFireDatabaseModule,
       BrowserAnimationsModule,
-      ModesService
-    )
+      FormsModule,
+      
+      
+    ), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync()
   ]  
+  
 };
+export class FirebaseModule { }
