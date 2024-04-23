@@ -1,0 +1,13 @@
+<div [attr.data-theme]="modeService.retroMode ? 'coffee' : 'dim'"
+    class="rounded-md shadow-3xl border-2 border-x-base-content border-t-base-content overflow-hidden lg:w-[450px]  w-full z-50">
+    <!-- Modal Header -->
+    <div class=" px-4 py-4 flex justify-between items-center {{modeService.retroMode ? '' : 'bg-base-200'}}">
+        <h2 class="text-lg font-semibold italic">""Change your path, return at any time.""</h2>
+        <button (click)="modalClose()" class="btn btn-sm btn-circle btn-ghost text-3xl hover:bg-none">✕</button>
+    </div>
+    <!-- Modal Body -->
+    <div class="p-4" [attr.data-theme]="modeService.retroMode ? 'retro' : 'dim'">
+        <ng-container *ngTemplateOutlet="modalDelete"></ng-container>
+    </div>
+</div>
+

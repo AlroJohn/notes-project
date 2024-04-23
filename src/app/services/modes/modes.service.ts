@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ModesService {
-  private _retroMode = true;
+  private _retroMode: boolean = true;
 
   get retroMode(): boolean {
     return this._retroMode;
   }
 
   set retroMode(value: boolean) {
+    
     this._retroMode = value;
   }
 }

@@ -9,5 +9,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    @variants responsive {
+      .masonry {
+        column-gap: 4rem;
+        column-count: 4;
+      }
+      .masonry-sm {
+        column-gap: 0;
+        column-count: 1;
+      }
+      .masonry-md {
+        column-gap: 2rem;
+        column-count: 3;
+      }
+      .masonry-lg {
+        column-gap: 2rem;
+        column-count: 4;
+      }
+      .break-inside {
+        break-inside: avoid;
+      }
+    }
+  
+    .first-column {
+      break-before: column;
+    }
+  
+    .first-row {
+      break-before: row;
+    }
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

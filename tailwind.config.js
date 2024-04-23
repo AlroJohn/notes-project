@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'brownie': '#A0522D',
+      },
       lineClamp: {
         7: '7',
         8: '8',

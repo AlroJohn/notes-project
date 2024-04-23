@@ -19,13 +19,12 @@ export class HeaderComponent {
   onOpen() {
     this.open.emit();
   }
-
   get retroMode(): boolean {
     return this.modeService.retroMode;
   }
-
   modesOnOff() {
     this.modeService.retroMode = !this.modeService.retroMode;
     document.body.setAttribute('data-theme', this.modeService.retroMode ? 'retro' : 'dark');
   }
+  
 }
